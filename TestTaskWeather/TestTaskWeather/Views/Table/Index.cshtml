@@ -1,0 +1,162 @@
+﻿@model IEnumerable<TestTaskWeather.Models.WeatherRecord>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <style>
+        #menu, #menu ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #menu {
+            height: 30px;
+            background-color: #666;
+            padding-left: 25px;
+            min-width: 470px;
+        }
+
+            #menu li {
+                float: left;
+                position: relative;
+                height: 100%;
+            }
+
+                #menu li a {
+                    display: block;
+                    padding: 6px;
+                    width: 100px;
+                    color: #fff;
+                    text-decoration: none;
+                    text-align: center;
+                }
+
+        table{
+            table-layout: auto;
+            width: 90%;
+            border-collapse: collapse;
+            border: 3px solid grey;
+        }
+
+        th {
+            border: 1px solid grey;
+        }
+
+        td {
+            border: 1px solid grey;
+        }
+    </style>
+
+</head>
+<body>
+    <nav>
+        <ul id="menu">
+            <li><a href="/Home/Index">Menu</a></li>
+            <li><a href="/Table/Index">Table</a></li>
+            <li><a href="/Upload/Index">Upload</a></li>
+        </ul>
+    </nav>
+    <br />
+
+    @using (Html.BeginForm("Index", "Table", FormMethod.Post))
+    {
+        <h3>Фильтр</h3>
+        @Html.DropDownList("Year", ViewBag.Years as SelectList)
+        @Html.DropDownList("Month", ViewBag.Months as SelectList)
+        <input type="submit" value="Показать" />
+    }
+
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temperature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirHumidity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DewPoint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirPressure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WindDirection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WindSpeed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cloudiness)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CloudBoundary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VisibilityRange)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeatherConditions)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Date.ToString("dd.MM.yyyy")
+                </td>
+                <td>
+                    @item.Time.ToString(@"hh\:mm")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirHumidity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DewPoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AirPressure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WindDirection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WindSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cloudiness)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CloudBoundary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VisibilityRange)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WeatherConditions)
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
